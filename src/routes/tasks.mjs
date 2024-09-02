@@ -3,15 +3,55 @@ const router = express.Router();
 
 // Sample data (tasks)
 let tasks = [
-  { id: "1", title: "Task 1", description: "Description for Task 1" },
-  { id: "2", title: "Task 2", description: "Description for Task 2" },
-  { id: "3", title: "Task 3", description: "Description for Task 3" },
+  {
+    id: "1",
+    title: "Task 1",
+    description: "Description for Task 1",
+    assignedTo: "Rodrigo Lujambio",
+    startDate: "01/01/2024",
+    endDate: "31/12/2024",
+    status: "To Do",
+    priority: "Low",
+    comments: [],
+  },
+  {
+    id: "2",
+    title: "Task 2",
+    description: "Description for Task 2",
+    assignedTo: "Michel Sampil",
+    startDate: "01/01/2024",
+    endDate: "31/12/2024",
+    status: "In Progress",
+    priority: "Medium",
+    comments: [],
+  },
+  {
+    id: "3",
+    title: "Task 3",
+    description: "Description for Task 3",
+    assignedTo: "Jose Abadie",
+    startDate: "01/01/2024",
+    endDate: "31/12/2024",
+    status: "Done",
+    priority: "High",
+    comments: [],
+  },
 ];
+
+// GET a specific task
+router.get("/tasks/:taskId", (req, res) => {
+  const taskId = req.params.taskId;
+  const task = tasks.filter((task) => task.id == taskId);
+  console.log(task);
+  res.json(task);
+});
+
 
 // GET all tasks
 router.get("/tasks", (req, res) => {
   res.json(tasks);
 });
+
 
 // POST a new task
 router.post("/tasks", (req, res) => {
