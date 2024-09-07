@@ -91,7 +91,7 @@ router.patch("/tasks/:taskId", (req, res) => {
   let task = tasks.find((task) => task.id === taskId);
 
   if (task) {
-    task = { ...task, ...updates };  // Actualizar solo los campos proporcionados
+    task = { ...task, ...updates };
     tasks = tasks.map((t) => (t.id === taskId ? task : t));
     res.json(task);
   } else {
