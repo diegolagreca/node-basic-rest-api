@@ -83,4 +83,21 @@ router.put("/tasks/:taskId", (req, res) => {
   res.json(tasks.find((task) => task.id === taskId));
 });
 
+// PATCH (partially update) a task by ID
+router.patch("/tasks/:taskId", (req, res) => {
+  const taskId = req.params.taskId;
+  const updates = req.body;
+
+  let task = tasks.find((task) => task.id === taskId);
+
+  if (task) {
+    task = { ...task, ...updates };  // Actualizar solo los campos proporcionados
+    tasks = tasks.map((t) => (t.id === taskId ? task : t));
+    res.json(task);
+  } else {
+    res.status(404).json({ message: "Task not found" });
+  }
+});
+
+
 export default router;
